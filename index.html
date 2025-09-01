@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Selamat Ulang Tahun 🎂</title>
+
+  <!-- favicon -->
+  <link rel="icon" href="img/favicon-32x32.png" type="image/png">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    @keyframes slideOutRight {
+      from { opacity: 1; transform: translateX(0); }
+      to   { opacity: 0; transform: translateX(100px); }
+    }
+    .fade-out-right {
+      animation: slideOutRight 0.8s ease-in forwards;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -10px;
+      opacity: 0.8;
+      animation: fall linear forwards;
+      z-index: 10;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 1;
+      }
+    }
+
+    .cursor::after {
+      content: "|";
+      animation: blink 0.8s infinite;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.1%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br sm:bg-gradient-to-br md:bg-gradient-to-br lg:bg-gradient-to-br xl:bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 min-h-screen overflow-x-hidden relative flex items-center justify-center px-4">
+
+  <!-- Tempat teks ucapan -->
+  <h1 id="kata" 
+      class="text-white text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center cursor leading-snug max-w-3xl">
+  </h1>
+
+  <!-- Pemutar lagu -->
+  <audio id="musik" autoplay loop muted>
+    <source src="lagu/sound-effect-longer-happy-birthday-music-box-361278.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const kataKata = [
+      "Selamat Ulang Tahun Cintaku 🎉",
+      "Semoga Panjang Umur Ya Sayangku ❤️",
+      "Sehat Selalu 💪",
+      "Bahagia Terus Ya Sayangku 💕",
+      "Sukses Selalu Untuk Kedepannya Ya Sayangku 🌟",
+      "Dan Satu Lagi, Semoga Makin Nurut Ya Sama Orang Tua Mu 🥰",
+      "I LOVE YOU 🥰",
+    ];
+
+    const kataEl = document.getElementById("kata");
+
+    function delay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function ketikTeks(teks) {
+      kataEl.textContent = "";
+      for (let i = 0; i < teks.length; i++) {
+        kataEl.textContent += teks[i];
+        await delay(100);
+      }
+    }
+
+    async function tampilkanSemuaKata() {
+      for (let i = 0; i < kataKata.length; i++) {
+        await ketikTeks(kataKata[i]); 
+        await delay(1500);            
+
+        kataEl.classList.add("fade-out-right");
+        await delay(800);             
+
+        kataEl.classList.remove("fade-out-right");
+        kataEl.textContent = "";
+      }
+
+      window.location.href = "page8.html";
+    }
+
+    tampilkanSemuaKata();
+
+    /* 🎉 Confetti 🎉 */
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+
+      const colors = ["#ff3838", "#ff9f1a", "#fffa65", "#32ff7e", "#18dcff", "#7d5fff", "#e84393"];
+      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+      const size = Math.random() * 10 + 5; // sedikit lebih besar untuk layar besar
+      confetti.style.width = size + "px";
+      confetti.style.height = size + "px";
+
+      const duration = Math.random() * 4 + 2;
+      confetti.style.animationDuration = duration + "s";
+
+      document.body.appendChild(confetti);
+
+      setTimeout(() => confetti.remove(), duration * 1000);
+    }
+
+    setInterval(createConfetti, 120);
+
+    // kalau reload, balik ke index
+    if (performance.navigation.type === 1) {
+      window.location.href = "index.html";
+    }
+
+    // 🔊 musik: unmute saat user klik pertama
+    const musik = document.getElementById("musik");
+
+    document.addEventListener("click", () => {
+      musik.muted = false;
+      musik.play().catch(err => console.log("Autoplay gagal:", err));
+    }, { once: true });
+  </script>
+</body>
+</html>
