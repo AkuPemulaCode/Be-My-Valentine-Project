@@ -1,136 +1,343 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Selamat Ulang Tahun 🎂</title>
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Selamat Ulang Tahun 🎂</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+<style>
+body{
+    background-color: black;
+  }
+  .video-section {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+  }
 
-  <style>
-    @keyframes slideOutRight {
-      from { opacity: 1; transform: translateX(0); }
-      to   { opacity: 0; transform: translateX(100px); }
-    }
-    .fade-out-right {
-      animation: slideOutRight 0.8s ease-in forwards;
-    }
+  .video-section video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-    .confetti {
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      top: -10px;
-      opacity: 0.8;
-      animation: fall linear forwards;
-      z-index: 10;
-    }
-    @keyframes fall {
-      to {
-        transform: translateY(100vh) rotate(360deg);
-        opacity: 1;
+
+  .overlay-content {
+    position: absolute;
+    bottom: 0px;   
+    left: 20px;     
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0));
+    padding: 10px 18px;
+    border-radius: 10px;
+    color: #fff;
+  }
+
+  .overlay-content img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    border: 2px solid #ffffff;
+  }
+
+  .overlay-content h3 {
+    margin: 10px;
+    font-size: 20px;
+  }
+
+  marquee{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 10px;
+  }
+
+  .kartu {
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    width: 450px;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+    transition: 0.3s;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    
+}
+.kartu:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    transform: translateY(-5px);
+    backdrop-filter: blur(50%);
+    color: tomato;
+
+}
+
+ .rgb-text {
+            font-size: 30px;
+            font-weight: bold;
+            animation: rgb 3s infinite;
+            margin-bottom: 10px;
+            margin-right: auto;
+            transition: 0.5s;
+            
+        }
+         @keyframes rgb {
+            0% {color: rgb(255, 0, 153); }
+            33% { color: rgb(255, 0, 115); }
+            66% { color: rgb(144, 0, 255); }
+            100% { color: rgb(255, 0, 0); }
+            
+        }
+      img{
+        margin-left: 40px;
       }
-    }
-
-    .cursor::after {
-      content: "|";
-      animation: blink 0.8s infinite;
-    }
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      50.1%, 100% { opacity: 0; }
-    }
-  </style>
-</head>
-<body class="bg-gradient-to-br sm:bg-gradient-to-br md:bg-gradient-to-br lg:bg-gradient-to-br xl:bg-gradient-to-br from-pink-500 via-purple-500 to-indigo-600 min-h-screen overflow-x-hidden relative flex items-center justify-center px-4">
-
-  <!-- Tempat teks ucapan -->
-  <h1 id="kata" 
-      class="text-white text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center cursor leading-snug max-w-3xl">
-  </h1>
-
-  <!-- Pemutar lagu -->
-  <audio id="musik" autoplay loop muted>
-    <source src="lagu/sound-effect-longer-happy-birthday-music-box-361278.mp3" type="audio/mpeg">
-  </audio>
-
-  <script>
-    const kataKata = [
-      "Selamat Ulang Tahun  🎉",
-      "Semoga Panjang Umur 🎂",
-      "Sehat Selalu 💪",
-      "Bahagia Terus  💕",
-      "Sukses Selalu Untuk Kedepannya  🌟",
-      "Dan Satu Lagi, Semoga Makin Nurut Ya Sama Orang Tua Mu 😊",
-    ];
-
-    const kataEl = document.getElementById("kata");
-
-    function delay(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    }
-
-    async function ketikTeks(teks) {
-      kataEl.textContent = "";
-      for (let i = 0; i < teks.length; i++) {
-        kataEl.textContent += teks[i];
-        await delay(100);
+      
+      .t1{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
+        animation: backwards;
+        transition: 0.5s;
       }
-    }
-
-    async function tampilkanSemuaKata() {
-      for (let i = 0; i < kataKata.length; i++) {
-        await ketikTeks(kataKata[i]); 
-        await delay(1500);            
-
-        kataEl.classList.add("fade-out-right");
-        await delay(800);             
-
-        kataEl.classList.remove("fade-out-right");
-        kataEl.textContent = "";
+      .t1:hover{
+        transform: perspective(100px) rotateX(10deg);
+        color: tomato;
+      }
+      .icon-ig{
+        color: red;
+        text-decoration: none;
+        animation: infinite;
+        transition: 0.5s;
+        font-size: 80px
+      }
+      .icon-ig:hover{
+        transform: perspective(100px) rotateX(10deg);
+        color: pink;
       }
 
-      window.location.href = "page8.html";
-    }
+      .kata{
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 30px;
+        animation: backwards;
+        transition: 0.5s;
+        display: flex;
+        flex-wrap: wrap;
+        text-decoration: none;
+        align-items: center;
+        justify-content: center;
+      }
+      .kata:hover{
+        transform: perspective(100px) rotateX(10deg);
+        color: tomato;
+      }
 
-    tampilkanSemuaKata();
+      hr{
+        color: white;
+      }
+    
+      .icon-tiktok{
+        color: white;
+        text-decoration: none;
+        animation: infinite;
+        transition: 0.5s;
+        font-size: 80px
+      }
+      .icon-tiktok:hover{
+        transform: perspective(100px) rotateX(10deg);
+        color: black
+        ;
+      }
 
-    /* 🎉 Confetti 🎉 */
-    function createConfetti() {
-      const confetti = document.createElement("div");
-      confetti.classList.add("confetti");
+      .icon-spotify{
+        color: green;
+        text-decoration: none;
+        animation: infinite;
+        transition: 0.5s;
+        font-size: 80px
+      }
+      .icon-spotify:hover{
+        transform: perspective(100px) rotateX(10deg);
+        color: greenyellow
+        ;
+      }
+</style>
+<body background="img/WhatsApp Image 2025-09-14 at 14.13.36_e1da6521.jpg">
+<div class="video-section">
+  <marquee behavior="right" direction="">
+    <img width="200px" height="" src="img/WhatsApp Image 2025-09-01 at 18.24.50_79e6c3ee.jpg" alt="">
+      <img width="200px" height="" src="img/WhatsApp Image 2025-09-14 at 14.13.25_03e8fdcf.jpg" alt="">
+        <img width="200px" height="" src="img/WhatsApp Image 2025-09-14 at 14.13.33_2e0ab4f1.jpg" alt="">
+          <img width="200px" height="" src="img/WhatsApp Image 2025-09-14 at 14.13.25_9ecbfe0b.jpg" alt="">
+            <img width="200px" height="" src="img/WhatsApp Image 2025-09-14 at 14.35.25_1484dcd1.jpg " alt="">
+             <img width="200px" height="" src="img/WhatsApp Image 2025-09-14 at 14.35.24_051bb9ed.jpg" alt="">
+             <img width="200px" height="" src="img/WhatsApp Image 2025-09-14 at 14.35.24_6b4f7f6f.jpg " alt="">
+    </marquee> 
+  <video  autoplay loop>
+  <source src="">
+  </video>
+  <div class="overlay-content">
+    <img src="img/WhatsApp Image 2025-09-01 at 18.28.40_5290ab7e.jpg" alt="Foto Profil">
+    <h3 class="t1">Selamat Ulang Tahun Cintaku ❤️</h3>
+  </div>
+</div>
+<hr>
+<marquee class="rgb-text mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto" behavior="alternate" direction="">I Love You 🥰</marquee>
+<hr>
+<p class="kata mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">Video Kenangan Bersamamu</p>
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+  
+  <div class="col">
+    <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+      <video class="card-img-top" width="940px" height="300px" controls>
+        <source src="WhatsApp Video 2025-09-14 at 13.38.03_424e6ee9.mp4">
+      </video>
+      <div class="card-body">
+        <h5 class="card-title">Cantik Aku Ini Blee 🥰</h5>
+        <p class="card-text">Ini Video paling lucu dan yang tergemoy aku buat tapi ini baru pertama masih ada lagi kok manis 😘</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+     <video class="card-img-top" width="940px" height="300px" controls>
+        <source src="WhatsApp Video 2025-09-14 at 15.53.45_c6ef6610.mp4">
+      </video>
+      <div class="card-body">
+        <h5 class="card-title">Ini Video yang tergemoy ai gemash 🥰</h5>
+        <p class="card-text">Ini Video paling ai gemash sekali ucu sayang ❤️</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+     <video class="card-img-top" width="940px" height="300px" controls>
+        <source src="WhatsApp Video 2025-09-14 at 15.53.45_6074bf5f.mp4">
+      </video>
+      <div class="card-body">
+        <h5 class="card-title">Ini Video jj lulusan kita 😍</h5>
+        <p class="card-text">ini foto kita pas jaman masih sekolah masih lope lope uhuyyy🤣</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+   <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+    <video class="card-img-top" width="940px" height="300px" controls>
+        <source src="WhatsApp Video 2025-09-14 at 15.53.49_f789d5e5.mp4">
+      </video>
+      <div class="card-body">
+        <h5 class="card-title">Ini Video yang bikin ai sedih dan terharu🥹</h5>
+        <p class="card-text">ucapan yang bikin ai selalu cinta sama taca, walaupun ai tidak buat tapi ai buatkan ini saja 😓</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-      confetti.style.left = Math.random() * window.innerWidth + "px";
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+  <div class="col">
+    <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+     <video class="card-img-top" width="940px" height="300px" controls>
+              <source src="WhatsApp Video 2025-09-14 at 15.53.49_e9d5a08a.mp4">
+            </video>
+      <div class="card-body">
+        <h5 class="card-title">Video hari jumat ai yang manis 😁</h5>
+        <p class="card-text">video gabut yang ai buat karna taca semangatin di hari jumat yang manis 🤍</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+      <video class="card-img-top" width="940px" height="300px" controls>
+              <source src="WhatsApp Video 2025-09-14 at 15.53.50_6245f463.mp4">
+            </video>
+      <div class="card-body">
+        <h5 class="card-title">Video yang dibuat oleh sodara ai tentang kita🎉</h5>
+        <p class="card-text">Semoga dari video ini kita beneran jadi suami istri, aamiin🙌</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+      <video class="card-img-top" width="940px" height="300px" controls>
+              <source src="WhatsApp Video 2025-09-14 at 15.53.50_cddc65e8.mp4">
+            </video>
+      <div class="card-body">
+        <h5 class="card-title">Ini video yang selalu bikin ai gemesh liat taca🤣</h5>
+        <p class="card-text">Pokoknya ai minta ini taca langsung buatkan ai, gemash sekali😙</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+   <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+     <video class="card-img-top" width="940px" height="300px" controls>
+              <source src="WhatsApp Video 2025-09-14 at 15.53.50_11a6b693.mp4">
+            </video>
+      <div class="card-body">
+        <h5 class="card-title">Ini Video yang ai bikin dan juga taca bikin😋</h5>
+        <p class="card-text">Pokoknya ini video buat ai dan taca khusus berdua dan gemoy🤗</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-      const colors = ["#ff3838", "#ff9f1a", "#fffa65", "#32ff7e", "#18dcff", "#7d5fff", "#e84393"];
-      confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+  <div class="col">
+    <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+     <video class="card-img-top" width="940px" height="300px" controls>
+              <source src="WhatsApp Video 2025-09-14 at 15.53.51_e4f64a0f.mp4">
+            </video>
+      <div class="card-body">
+        <h5 class="card-title">Video yang ai buat pas baru pacaran sama taca 🩷</h5>
+        <p class="card-text">Ini Video yang ai buat untuk taca pas masih banget awal pacaran 🤩</p>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+    <video class="card-img-top" width="940px" height="300px" controls>
+              <source src="WhatsApp Video 2025-09-14 at 15.53.51_fafd2d69.mp4">
+            </video>
+      <div class="card-body">
+        <h5 class="card-title">Video abis sidang PKL 2022😉</h5>
+        <p class="card-text">Video yang dibuat taca abis sidang PKL 2022🤩</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-      const size = Math.random() * 10 + 5; // sedikit lebih besar untuk layar besar
-      confetti.style.width = size + "px";
-      confetti.style.height = size + "px";
+<div class="container-fluid mt-4">
+  <p class="t1"> Sosial Media & Lagu</p>
+	<div class="row ">
+		<div class="col-md-4 mt-4 kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+     <a class="icon-ig" href="https://www.instagram.com/davinatsya?igsh=MTk4cXVyZ3JwZnluZg==" target="_blank"><i class="bi bi-instagram"></i></a>
+     <a class="kata" href="https://www.instagram.com/davinatsya?igsh=MTk4cXVyZ3JwZnluZg==" target="_blank">Instagram</a>
+		</div>
+		<div class="col-md-4 mt-4 kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+     <a class="icon-tiktok" href="https://www.tiktok.com/@avoocad0oo?_t=ZS-8ziP9OraEBr&_r=1" target="_blank"><i class="bi bi-tiktok"></i></a>
+     <a href="https://www.tiktok.com/@avoocad0oo?_t=ZS-8ziP9OraEBr&_r=1" class="kata" target="_blank">Tiktok</a>
+		</div>
+		<div class="col-md-4  mt-4 kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto">
+      <a class="icon-spotify" href="https://open.spotify.com/track/1x9jnpPOAMSrr7DuIG5jMl?si=laU-2BfCQyulQHMshwfbcw" target="_blank"><i class="bi bi-spotify"></i></a>
+      <a href="https://open.spotify.com/track/1x9jnpPOAMSrr7DuIG5jMl?si=laU-2BfCQyulQHMshwfbcw" class="kata" target="_blank">Lagu Untuk Kamu</a>
+		</div>
+	</div>
+</div>
 
-      const duration = Math.random() * 4 + 2;
-      confetti.style.animationDuration = duration + "s";
+<footer class="mt-4">
+  <p class="t1 kartu mx-auto shadow-lg max-w-md mx-auto shadow-md max-w-sm mx-auto text-center w-100 p-3 ">Created By Muhammad Almustofa Khanafi</p>
+</footer>
 
-      document.body.appendChild(confetti);
-
-      setTimeout(() => confetti.remove(), duration * 1000);
-    }
-
-    setInterval(createConfetti, 120);
-
-    // kalau reload, balik ke index
-    if (performance.navigation.type === 1) {
-      window.location.href = "index.html";
-    }
-
-    // 🔊 musik: unmute saat user klik pertama
-    const musik = document.getElementById("musik");
-
-    document.addEventListener("click", () => {
-      musik.muted = false;
-      musik.play().catch(err => console.log("Autoplay gagal:", err));
-    }, { once: true });
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>
